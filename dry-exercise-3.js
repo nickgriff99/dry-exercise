@@ -8,20 +8,20 @@ class CsvValidation {
   constructor(product) {
     this.product = product;
   }
-
+  requiredProperties = [
+    "color",
+    "size", 
+    "style",
+  ];
   validateProduct(product) {
-    if (!product.color) {
-      throw new Error("Import failed: The product [color] is missing");
-    }
-    if (!product.size) {
-      throw new Error("Import failed: The product [size] is missing");
-    }
-    if (!product.style) {
-      throw new Error("Import failed: The product [style] is missing");
+    for (const property of this.requiredProperties) {
+      if (!product[property]) {
+        throw new Error(`Product is missing required property: ${property}`);
+      }
     }
     console.log("VALID: PASSED");
   }
-}
+};
 
 const shirt = {
   color: "blue",
